@@ -42,8 +42,8 @@ export const authLogin = (username, password) => {
   return dispatch => {
     dispatch(authStart());
     axios.post('http://127.0.0.1:8000/rest-auth/login/',{
-      username: username,
-      password: password
+      "username": username,
+      "password": password
     }).then(response => {
         const token = response.data.key;
         const expireDate = new Date(new Date().getTime() + 3600 * 1000)

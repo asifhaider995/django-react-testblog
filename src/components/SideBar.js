@@ -23,6 +23,7 @@ export default function SideBar(props) {
           <hr />
           <ListItem className={classes.listItem}><ListItemText> Login </ListItemText></ListItem>
         </List>
+        <p> NB: This is a static drawer, please modify </p>
         </div>
       </Drawer>
   );
