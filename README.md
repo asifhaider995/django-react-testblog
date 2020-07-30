@@ -2,7 +2,9 @@ This project is a basic fullstack test blog created with integration of djangore
 
 # Only works in local server
 
-# To run this project, go to terminal and run 'python manage.py runserver'
+# To run this project, go to terminal and run 
+
+### `python manage.py runserver`
 
 Minimal Security, Basic Authentication applied. AllowAny Permission classes applied.
 
@@ -18,11 +20,11 @@ react, react-router-dom, react-redux, redux, @material-ui/core (check requiremen
 
 ### TO REMOVE INTEGRATION
 
-Navigate to the urls.py in TestBlog directory
-Remove 're_path' linked to the 'index.html'
+Navigate to the `urls.py` in TestBlog directory
+Remove `re_path` linked to the `index.html`
 Navigate to the settings.py in the TestBlog directory
-Remove value of 'DIRS' from 'TEMPLATES' section
-Navigate to the terminal and run 'python manage.py runserver' 
+Remove value of `DIRS` from `TEMPLATES` section
+Navigate to the terminal and run `python manage.py runserver` 
 Open a different terminal and run regular [Create React App] commands
 
 The project frontend was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
