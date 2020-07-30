@@ -1,6 +1,6 @@
 This project is a basic fullstack test blog created with integration of djangorestframework and react. 
 
-## Only works in local server
+# Only works in local server
 
 # To run this project, go to terminal and run 'python manage.py runserver'
 
@@ -9,21 +9,21 @@ Minimal Security, Basic Authentication applied. AllowAny Permission classes appl
 ### YouTube channel 'JustDjango' helped me create this. 
 ### Visit their channel in 'https://www.youtube.com/channel/UCRM1gWNTDx0SHIqUJygD-kQ'
 
-## Front End Build pack includes
+# Front End Build pack includes
 
 react, react-router-dom, react-redux, redux, @material-ui/core (check requirements.txt)
 
-## Procfile and runtime.txt configured for heroku
+# Procfile and runtime.txt configured for heroku
 
 
 ### TO REMOVE INTEGRATION
 
-# Navigate to the urls.py in TestBlog directory
-# Remove 're_path' linked to the 'index.html'
-# Navigate to the settings.py in the TestBlog directory
-# Remove value of 'DIRS' from 'TEMPLATES' section
-# Navigate to the terminal and run 'python manage.py runserver' 
-# Open a different terminal and run regular [Create React App] commands
+Navigate to the urls.py in TestBlog directory
+Remove 're_path' linked to the 'index.html'
+Navigate to the settings.py in the TestBlog directory
+Remove value of 'DIRS' from 'TEMPLATES' section
+Navigate to the terminal and run 'python manage.py runserver' 
+Open a different terminal and run regular [Create React App] commands
 
 The project frontend was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
