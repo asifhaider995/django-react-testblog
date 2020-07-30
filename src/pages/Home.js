@@ -1,0 +1,117 @@
+import React from 'react';
+import { Button, Typography, Grid, Paper, makeStyles } from '@material-ui/core';
+import ArticleList from './ArticleList';
+import ServerError from '../components/ServerError';
+import Loading from '../components/Loading';
+
+
+export default function Home(props) {
+  const useStyles = makeStyles({
+      gridRoot: {
+        maxWidth: '100%',
+        maxHeight: '100%',
+        alignItems: 'center',
+        paddingTop: '2rem',
+        paddingBottom: '2rem',
+        marginTop: '.5rem',
+        marginBottom: '.5rem'
+      },
+      grid: {
+        margin: '1em'
+      },
+      paper : {
+        alignItems: 'center',
+        padding: '10px'
+      },
+      cardRoot: {
+        maxWidth: '100%',
+        alignItems: 'center',
+      },
+      media: {
+        height: '80%',
+      },
+      gridJumbo : {
+        backgroundSize: 'cover',
+      },
+      overlay : {
+          backgroundColor: 'white',
+          opacity: '0.5',
+          position: 'relative',
+      },
+      createBtn: {
+        padding: '.5rem',
+        marginTop: '1rem'
+      }
+    });
+  const classes = useStyles();
+  function handleCardClick(id) {
+    window.location.href='/'+id
+  }
+  const createButton = (
+    <Grid className={classes.grid}>
+      <Button
+        onClick={props.handleCreate} className={classes.createBtn}
+        variant='contained' color='primary' fullWidth> Create an Article </Button>
+    </Grid>
+  )
+  return (
+        <Grid className={classes.gridRoot} >
+          <Typography align='center' variant='h2'> Article List </Typography>
+          <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.grid}>
+            <Paper elevation={3} className={classes.paper}>
+              {
+                (props.dataAvailable && !props.isLoading) ? (
+                  props.data.map((items) => {
+                    return (
+                      <Grid
+                        key={items.id}
+                        item
+                        xs={12}
+                        sm={12}
+                        md={12}
+                        lg={12}
+                        xl={12}
+                      >
+                        <ArticleList onClick={() => handleCardClick(items.id)} title={items.title} content={items.content} className={classes.cardRoot}/>
+                      </Grid>
+                    )
+                  })
+                ) : ( (!props.isLoading && !props.dataAvailable) ? (
+                  <Grid
+                    item
+                    xs={12}
+                    sm={12}
+                    md={12}
+                    lg={12}
+                    xl={12}
+                  >
+                    <ServerError />
+                  </Grid>
+                ) : (
+                  <Grid
+                    item
+                    xs={12}
+                    sm={12}
+                    md={12}
+                    lg={12}
+                    xl={12}
+                  >
+                    {/*}<Card className={classes.cardRoot}>
+                      <CardActionArea>
+                        <CardContent>
+                          <Typography variant='h5'> Loading... </Typography>
+                        </CardContent>
+                      </CardActionArea>
+                    </Card> */}
+                    <Loading />
+                  </Grid>
+                ))
+              }
+              {
+                (props.dataAvailable && !props.isLoading) ?  createButton : <div />
+              }
+              </Paper>
+            </Grid>
+        </Grid>
+  );
+}
