@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '100%'
   },
   listItem : {
-    width: '12rem',
+    width: '14rem',
     justifyContent: 'center',
   }
 }));
