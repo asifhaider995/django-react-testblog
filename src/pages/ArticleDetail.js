@@ -1,10 +1,15 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
-import {Paper, Typography, Grid, Button, CardActions, makeStyles} from '@material-ui/core';
+import {Paper, Icon, Typography, Grid, Button, CardActions, makeStyles} from '@material-ui/core';
 import {useParams} from 'react-router-dom'
 import axios from 'axios';
 import ServerError from '../components/ServerError';
 import Loading from '../components/Loading';
+
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import CommentIcon from '@material-ui/icons/Comment';
+import ShareIcon from '@material-ui/icons/Share';
+
 
 export default function ArticleDetail(props) {
   const [article, setArticle] = useState({});
@@ -36,7 +41,7 @@ export default function ArticleDetail(props) {
 
     return () => { unmounted = true };
   },[ID, props.token])
-  const useStyles = makeStyles({
+  const useStyles = makeStyles((theme) => ({
       gridRoot: {
         maxWidth: '100%',
         maxHeight: '100%',
@@ -64,6 +69,21 @@ export default function ArticleDetail(props) {
       backButton : {
         marginBottom: '0.5rem'
       },
+      actionButtons: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      actionButtonIcons: {
+        marginRight: '.25rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        [theme.breakpoints.down('sm')]: {
+          display: 'flex',
+          margin: '0 .5rem'
+        }
+      },
       createBtn : {
         marginTop: '1rem'
       },
@@ -73,7 +93,7 @@ export default function ArticleDetail(props) {
       deleteBtn : {
         marginTop: '1rem'
       }
-    });
+    }));
   const classes = useStyles();
   return (
     <Grid className={classes.gridRoot}>
@@ -107,9 +127,9 @@ export default function ArticleDetail(props) {
                     </Paper>
                     <Grid className={classes.grid}>
                       <CardActions>
-                        <Button fullWidth color='primary' size='medium' variant='text'>Like</Button>
-                				<Button fullWidth color='secondary' size='medium' variant='text'>Comment</Button>
-                				<Button fullWidth color='inherit' size='medium' variant='text'> Share </Button>
+                        <Button fullWidth color='primary' size='medium' variant='text' className={classes.actionButtons}><Icon className={classes.actionButtonIcons}><FavoriteBorderIcon /></Icon>Like</Button>
+                        <Button fullWidth color='secondary' size='medium' variant='text' className={classes.actionButtons}><Icon className={classes.actionButtonIcons}><CommentIcon /></Icon>Comment</Button>
+                        <Button fullWidth color='inherit' size='medium' variant='text' className={classes.actionButtons}><Icon className={classes.actionButtonIcons}><ShareIcon /></Icon>Share </Button>
                       </CardActions>
                     </Grid>
                 </Grid>
