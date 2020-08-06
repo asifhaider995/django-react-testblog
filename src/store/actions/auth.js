@@ -24,7 +24,7 @@ export const authFail = (error) => {
 export const logout = () => {
   localStorage.removeItem('token');
   localStorage.removeItem('expirationDate');
-  axios.post('http://127.0.0.1:8000/rest-auth/logout/').catch(error => console.log(error))
+  axios.post('https://djreact-testblog.herokuapp.com/rest-auth/logout/').catch(error => console.log(error))
   return {
     type: actionTypes.AUTH_LOGOUT,
   }
@@ -41,7 +41,7 @@ export const checkAuthTimeout = (expirationDate) => {
 export const authLogin = (username, password) => {
   return dispatch => {
     dispatch(authStart());
-    axios.post('http://127.0.0.1:8000/rest-auth/login/',{
+    axios.post('https://djreact-testblog.herokuapp.com/rest-auth/login/',{
       "username": username,
       "password": password
     }).then(response => {
@@ -61,7 +61,7 @@ export const authLogin = (username, password) => {
 export const authRegister = (username, email, password, password2) => {
   return dispatch => {
     dispatch(authStart());
-    axios.post('http://127.0.0.1:8000/rest-auth/registration/',{
+    axios.post('https://djreact-testblog.herokuapp.com/rest-auth/registration/',{
       "username": username,
       "email": email,
       "password1": password,

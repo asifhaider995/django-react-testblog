@@ -44,7 +44,7 @@ function App(props) {
       "Content-Type": "application/json",
       "Authorization": 'Token '+props.token
     }
-    axios.get("http://127.0.0.1:8000/api/article/")
+    axios.get("https://djreact-testblog.herokuapp.com/api/article/")
     .then( response => {
       if(!unmounted) {
         setUsers(response.data)
