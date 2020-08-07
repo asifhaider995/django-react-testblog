@@ -1,6 +1,10 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
 
+//   Host names
+//  'http://127.0.0.1'
+//  'https://djreact-testblog.herokuapp.com'
+
 export const authStart = () => {
   return {
     type: actionTypes.AUTH_START,
