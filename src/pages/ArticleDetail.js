@@ -99,7 +99,7 @@ export default function ArticleDetail(props) {
       }
     }));
   const classes = useStyles();
-  console.log(articles.user)
+  console.log(article.user)
   return (
     <Grid className={classes.gridRoot}>
       {
