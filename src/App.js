@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-// import './App.css';
+
+/////////////////// Pages ///////////////////////////////
 import Home from './pages/Home';
 import ArticleDetail from './pages/ArticleDetail';
 import ArticleCreate from './pages/ArticleCreate';
@@ -7,13 +8,24 @@ import ArticleDelete from './pages/ArticleDelete';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import NoMatch from './pages/NoMatch';
+
+////////////////// Components ///////////////////////////
 import Layout from './components/Layout';
 import Footer from './components/Footer';
 import NavBar from './components/Navbar';
 import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import axios from 'axios';
+
+////////////// Redux imports ///////////////////////////
 import {connect} from 'react-redux';
 import * as actions from './store/actions/auth'
+////////////////////////////////////////////////////////
+
+
+//  'http://127.0.0.1'
+//   'https://djreact-testblog.herokuapp.com'
+
+
 
 const mapStateToProps = (state) => {
   return {
@@ -77,7 +89,6 @@ function App(props) {
     window.location.href ='/delete/'+id;
     console.log("Delete, id: "+id)
   }
-  console.log("Logged: "+isLogged)
   return (
     <React.Fragment>
         <Router>

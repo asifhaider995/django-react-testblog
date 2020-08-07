@@ -10,16 +10,19 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import CommentIcon from '@material-ui/icons/Comment';
 import ShareIcon from '@material-ui/icons/Share';
 
+//   Host names
+//  'http://127.0.0.1'
+//  'https://djreact-testblog.herokuapp.com'
+
 
 export default function ArticleDetail(props) {
   const [article, setArticle] = useState({});
   const [isLoading, setLoading] = useState(true);
   const [isDataAvailable, setDataAvailable] = useState(false)
   var {ID} = useParams();
-  console.log(ID)
-  console.log(props.isAuthenticated)
   useEffect((thisID=ID) => {
     let unmounted = false;
+    console.log("From Article Detail: "+ window.location.hostname)
     axios.defaults.headers = {
       "Content-Type": "application/json",
       "Authorization": 'Token '+props.token
@@ -56,7 +59,8 @@ export default function ArticleDetail(props) {
       },
       paper : {
         alignItems: 'center',
-        padding: '2rem'
+        padding: '2rem',
+        height: '100%'
       },
       errorPaper : {
         alignItems: 'center',
@@ -113,7 +117,7 @@ export default function ArticleDetail(props) {
               <Paper elevation={1} className={classes.paper}>
                 <Typography
                   gutterBottom
-                  variant="h4"
+                  variant="h3"
                   align="center"
                   color="secondary"
                 >
@@ -124,6 +128,7 @@ export default function ArticleDetail(props) {
                         <Typography>
                             {article.content}
                         </Typography>
+                        <Typography><em> written by --- {article.user}</em></Typography>
                     </Paper>
                     <Grid className={classes.grid}>
                       <CardActions>

@@ -5,8 +5,14 @@ import axios from 'axios';
 import ServerError from '../components/ServerError';
 import Loading from '../components/Loading';
 
-const useStyles = makeStyles((theme) => ({
 
+//   Host names
+//  'http://127.0.0.1'
+//  'https://djreact-testblog.herokuapp.com'
+
+
+
+const useStyles = makeStyles((theme) => ({
   gridRoot: {
     maxWidth: '100%',
     maxHeight: '100%',

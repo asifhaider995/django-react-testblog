@@ -57,7 +57,7 @@ function Login(props) {
   let errorMessage = null;
 
   if (props.error) {
-    console.log(props.isLoading)
+    console.log(props.error.response.status)
     errorMessage = (
       <Typography> {props.error.message} </Typography>
     )
