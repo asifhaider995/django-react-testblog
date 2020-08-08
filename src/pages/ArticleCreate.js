@@ -141,7 +141,8 @@ export default function ArticleCreate(props) {
         }).catch(error => console.error(error))
         break;
       default:
-        console.log('Default') break;
+        console.log('Default');
+        break;
 
 
     }
