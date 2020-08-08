@@ -1,59 +1,53 @@
 import React from 'react';
-import { Button, Typography, Grid, Paper, makeStyles } from '@material-ui/core';
+import { Typography, Grid, Paper, makeStyles } from '@material-ui/core';
 import ArticleList from './ArticleList';
 import ServerError from '../components/ServerError';
 import Loading from '../components/Loading';
 
 
+const useStyles = makeStyles({
+  gridRoot: {
+    maxWidth: '100%',
+    maxHeight: '100%',
+    alignItems: 'center',
+    paddingTop: '2rem',
+    paddingBottom: '2rem',
+    marginTop: '.5rem',
+    marginBottom: '.5rem'
+  },
+  grid: {
+    margin: '1em'
+  },
+  paper : {
+    alignItems: 'center',
+    padding: '10px'
+  },
+  cardRoot: {
+    maxWidth: '100%',
+    alignItems: 'center',
+  },
+  media: {
+    height: '80%',
+  },
+  gridJumbo : {
+    backgroundSize: 'cover',
+  },
+  overlay : {
+      backgroundColor: 'white',
+      opacity: '0.5',
+      position: 'relative',
+  },
+  createBtn: {
+    padding: '.5rem',
+    marginTop: '1rem'
+  }
+});
+
 export default function Home(props) {
-  const useStyles = makeStyles({
-      gridRoot: {
-        maxWidth: '100%',
-        maxHeight: '100%',
-        alignItems: 'center',
-        paddingTop: '2rem',
-        paddingBottom: '2rem',
-        marginTop: '.5rem',
-        marginBottom: '.5rem'
-      },
-      grid: {
-        margin: '1em'
-      },
-      paper : {
-        alignItems: 'center',
-        padding: '10px'
-      },
-      cardRoot: {
-        maxWidth: '100%',
-        alignItems: 'center',
-      },
-      media: {
-        height: '80%',
-      },
-      gridJumbo : {
-        backgroundSize: 'cover',
-      },
-      overlay : {
-          backgroundColor: 'white',
-          opacity: '0.5',
-          position: 'relative',
-      },
-      createBtn: {
-        padding: '.5rem',
-        marginTop: '1rem'
-      }
-    });
   const classes = useStyles();
   function handleCardClick(id) {
     window.location.href='/'+id
   }
-  const createButton = (
-    <Grid className={classes.grid}>
-      <Button
-        onClick={props.handleCreate} className={classes.createBtn}
-        variant='contained' color='primary' fullWidth> Create an Article </Button>
-    </Grid>
-  )
   return (
         <Grid className={classes.gridRoot} >
           <Typography align='center' variant='h2'> Article List </Typography>
@@ -96,19 +90,9 @@ export default function Home(props) {
                     lg={12}
                     xl={12}
                   >
-                    {/*}<Card className={classes.cardRoot}>
-                      <CardActionArea>
-                        <CardContent>
-                          <Typography variant='h5'> Loading... </Typography>
-                        </CardContent>
-                      </CardActionArea>
-                    </Card> */}
                     <Loading />
                   </Grid>
                 ))
-              }
-              {
-                (props.dataAvailable && !props.isLoading) ?  createButton : <div />
               }
               </Paper>
             </Grid>

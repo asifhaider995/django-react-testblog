@@ -55,7 +55,6 @@ function Register(props) {
 
   let errorMessage = null;
   if (props.error) {
-    console.log(props.isLoading)
     errorMessage = (
       <Typography> {props.error.message} </Typography>
     )

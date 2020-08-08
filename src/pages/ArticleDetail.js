@@ -10,9 +10,68 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import CommentIcon from '@material-ui/icons/Comment';
 import ShareIcon from '@material-ui/icons/Share';
 
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import UpdateIcon from '@material-ui/icons/Update';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 //   Host names
-//  'http://127.0.0.1'
+//  'http://127.0.0.1:8000'
 //  'https://djreact-testblog.herokuapp.com'
+
+const useStyles = makeStyles((theme) => ({
+  gridRoot: {
+    maxWidth: '100%',
+    maxHeight: '100%',
+    alignItems: 'center',
+    paddingTop: '2rem',
+    paddingBottom: '2rem',
+    marginTop: '1rem',
+    marginBottom: '1rem'
+  },
+  grid: {
+    margin: '1rem',
+  },
+  paper : {
+    alignItems: 'center',
+    padding: '2rem',
+    height: '100%'
+  },
+  errorPaper : {
+    alignItems: 'center',
+    padding: '5rem'
+  },
+  loadingPaper : {
+    alignItems: 'center',
+    padding: '5rem'
+  },
+  backButton : {
+    marginBottom: '0.5rem'
+  },
+  actionButtons: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  actionButtonIcons: {
+    marginRight: '.25rem',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    [theme.breakpoints.down('sm')]: {
+      display: 'flex',
+      margin: '0 .5rem'
+    }
+  },
+  createBtn : {
+    marginTop: '1rem'
+  },
+  updateBtn : {
+    marginTop: '1rem'
+  },
+  deleteBtn : {
+    marginTop: '1rem'
+  }
+}));
 
 
 export default function ArticleDetail(props) {
@@ -22,7 +81,6 @@ export default function ArticleDetail(props) {
   var {ID} = useParams();
   useEffect((thisID=ID) => {
     let unmounted = false;
-    console.log("From Article Detail: "+ window.location.hostname)
     axios.defaults.headers = {
       "Content-Type": "application/json",
       "Authorization": 'Token '+props.token
@@ -44,62 +102,7 @@ export default function ArticleDetail(props) {
 
     return () => { unmounted = true };
   },[ID, props.token])
-  const useStyles = makeStyles((theme) => ({
-      gridRoot: {
-        maxWidth: '100%',
-        maxHeight: '100%',
-        alignItems: 'center',
-        paddingTop: '2rem',
-        paddingBottom: '2rem',
-        marginTop: '1rem',
-        marginBottom: '1rem'
-      },
-      grid: {
-        margin: '1rem',
-      },
-      paper : {
-        alignItems: 'center',
-        padding: '2rem',
-        height: '100%'
-      },
-      errorPaper : {
-        alignItems: 'center',
-        padding: '5rem'
-      },
-      loadingPaper : {
-        alignItems: 'center',
-        padding: '5rem'
-      },
-      backButton : {
-        marginBottom: '0.5rem'
-      },
-      actionButtons: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-      actionButtonIcons: {
-        marginRight: '.25rem',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        [theme.breakpoints.down('sm')]: {
-          display: 'flex',
-          margin: '0 .5rem'
-        }
-      },
-      createBtn : {
-        marginTop: '1rem'
-      },
-      updateBtn : {
-        marginTop: '1rem'
-      },
-      deleteBtn : {
-        marginTop: '1rem'
-      }
-    }));
   const classes = useStyles();
-  console.log(article.user)
   return (
     <Grid className={classes.gridRoot}>
       {
@@ -126,10 +129,10 @@ export default function ArticleDetail(props) {
                 </Typography>
                 <Grid className={classes.grid}>
                     <Paper elevation={3} className={classes.paper}>
-                        <Typography>
+                        <Typography align='justify'>
                             {article.content}
                         </Typography>
-                        <Typography><em> written by --- {article.user}</em></Typography>
+                        <br />
                     </Paper>
                     <Grid className={classes.grid}>
                       <CardActions>
@@ -143,17 +146,26 @@ export default function ArticleDetail(props) {
               <Grid>
                 <Button
                   onClick={(id) => {props.handleUpdate(ID)}} className={classes.updateBtn}
-                  variant='contained' color='inherit' fullWidth> Update this Article </Button>
+                  variant='contained' color='inherit' fullWidth>
+                  <Icon className={classes.actionButtonIcons}><UpdateIcon /></Icon>
+                    Update this Article
+                </Button>
               </Grid>
               <Grid>
                 <Button
                   onClick={(id) => {props.handleDelete(ID)}} className={classes.deleteBtn}
-                  variant='contained' color='secondary' fullWidth> Delete this Article </Button>
+                  variant='contained' color='secondary' fullWidth>
+                  <Icon className={classes.actionButtonIcons}><DeleteIcon /></Icon>
+                  Delete this Article
+                </Button>
               </Grid>
               <Grid>
                 <Button
                   onClick={props.handleCreate} className={classes.createBtn}
-                  variant='contained' color='primary' fullWidth> Create an Article </Button>
+                  variant='contained' color='primary' fullWidth>
+                  <Icon className={classes.actionButtonIcons}><AddCircleIcon /></Icon>
+                  Create an Article
+                </Button>
               </Grid>
             </Paper>
           ) : (

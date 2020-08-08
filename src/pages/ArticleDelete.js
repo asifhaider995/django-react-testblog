@@ -81,9 +81,7 @@ export default function ArticleDelete(props) {
 
 
   const handleDelete = (event, articleID) => {
-    console.log("Delete")
     event.preventDefault();
-    console.log('DELETE')
     axios.delete(`https://djreact-testblog.herokuapp.com/api/article/`+ID+`/`)
     .then(response => {
       console.log(response.status);
