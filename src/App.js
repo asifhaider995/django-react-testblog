@@ -21,9 +21,9 @@ import {connect} from 'react-redux';
 import * as actions from './store/actions/auth'
 ////////////////////////////////////////////////////////
 
-
-//  'http://127.0.0.1'
-//   'https://djreact-testblog.herokuapp.com'
+//   Available Hosts
+//  'http://127.0.0.1:8000'
+//  'https://djreact-testblog.herokuapp.com'
 
 
 
@@ -45,11 +45,7 @@ function App(props) {
   const [users, setUsers] = useState([]);
   const [isLoading, setLoading] = useState(true)
   const [dataAvailable, setDataAvailable] = useState(false)
-  const [isLogged, setLogged] = useState(false)
   useEffect(() => {
-    if(props.token !== null) {
-      setLogged(true)
-    }
     let unmounted = false;
     props.onTryAutoSignup()
     axios.defaults.headers = {
@@ -82,12 +78,10 @@ function App(props) {
   }
   const handleArticleUpdate = (id) => {
     window.location.href='/update/'+id;
-    console.log("Update id: "+id);
 
   }
   const handleArticleDelete = (id) => {
     window.location.href ='/delete/'+id;
-    console.log("Delete, id: "+id)
   }
   return (
     <React.Fragment>
@@ -96,13 +90,13 @@ function App(props) {
           <Layout>
             <Switch>
               <Route exact path="/login">
-                { isLogged ? (<Redirect to='/'/>) : (<Login />) }
+                { props.isAuthenticated ? (<Redirect to='/'/>) : (<Login />) }
               </Route>
               <Route exact path="/register">
-                { isLogged ? (<Redirect to='/'/>) : (<Register />) }
+                { props.isAuthenticated ? (<Redirect to='/'/>) : (<Register />) }
               </Route>
               <Route exact path="/" >
-                { !isLogged ? (<Redirect to='/login' />) : (
+                { !props.isAuthenticated ? (<Redirect to='/login' />) : (
                   <Home
                     {...props}
                     data={users}
@@ -112,16 +106,21 @@ function App(props) {
                   />) }
               </Route>
               <Route exact path="/create">
-                <ArticleCreate requestType='post' handleDiscard={handleDiscard}/>)
+                {(localStorage.getItem('token') === null) && (<Redirect to='/login' />)}
+                <ArticleCreate token={props.token} requestType='post' handleDiscard={handleDiscard}/>
               </Route>
               <Route exact path="/update/:ID">
-                    <ArticleCreate requestType='put' handleDiscard={handleDiscard}/>
+                {(localStorage.getItem('token') === null) && (<Redirect to='/login' />)}
+                <ArticleCreate token={props.token} requestType='put' handleDiscard={handleDiscard}/>
               </Route>
               <Route exact path="/delete/:ID">
-                  <ArticleDelete handleRedirect={handleDiscard}/>
+                {(localStorage.getItem('token') === null) && (<Redirect to='/login' />)}
+                <ArticleDelete token={props.token} handleRedirect={handleDiscard}/>
               </Route>
               <Route exact path="/:ID">
+                {(localStorage.getItem('token') === null) && (<Redirect to='/login' />)}
                 <ArticleDetail
+                  token={props.token}
                   handleCreate={handleOpenCreate}
                   handleUpdate={handleArticleUpdate}
                   handleDelete={handleArticleDelete} />

@@ -30,13 +30,19 @@ const useStyles = makeStyles({
   fieldGrid : {
     width: '18rem',
     maxWidth: '100%',
-    marginTop: '2rem',
-    marginBottom: '2rem'
+    margin: '2rem 0',
   },
- textFieldItems: {
-   marginTop: '.75rem',
-   marginBottom: '.25rem'
- },
+  textFieldItems: {
+     marginTop: '.75rem',
+     marginBottom: '.25rem'
+  },
+  errorMessage: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '18rem',
+    height: '100%',
+  },
   buttonGrid : {
     marginTop: '1.5rem',
     marginBottom: '2rem',
@@ -57,9 +63,11 @@ function Login(props) {
   let errorMessage = null;
 
   if (props.error) {
-    console.log(props.error.response.status)
+    const message = props.error.response.status === 400 ?
+    "*Username and *Password don't match \n Or, \n Username doesn't exist"
+    : props.error.message;
     errorMessage = (
-      <Typography> {props.error.message} </Typography>
+      <Typography style={{whiteSpace: 'pre-line'}} align='center' variant='subtitle2' color='error'> {message} </Typography>
     )
   }
 
@@ -74,8 +82,6 @@ function Login(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    // console.log(username)
-    // console.log(password)
     props.onAuth(username, password)
   }
   return (
@@ -111,7 +117,9 @@ function Login(props) {
                       className={classes.textFieldItems}
                     />
                   </Grid>
-                  {errorMessage}
+                  <Grid className={classes.errorMessage}>
+                    {errorMessage}
+                  </Grid>
                   <Grid className={classes.buttonGrid}>
                     <Button type='submit' fullWidth variant='contained' color="primary"> Login </Button>
                   </Grid>

@@ -18,12 +18,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
+key_path = os.path.join(BASE_DIR, 'key.txt')
+def get_key():
+    key = ''
+    with open(key_path,'r') as key_file:
+        key = (key_file.readline())
+    return key
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'tmn82wg7)gmp!n*5#!j@a%_w4c@^uq98na2q-vk6^9$%g(^1=t'
+SECRET_KEY = get_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['djreact-testblog.herokuapp.com','127.0.0.1']
 
@@ -31,6 +36,12 @@ ALLOWED_HOSTS = ['djreact-testblog.herokuapp.com','127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
     'corsheaders',
     'rest_auth',
     'django.contrib.sites',
@@ -40,12 +51,6 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'rest_framework',
     'rest_framework.authtoken',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
     'articles',
 ]
 

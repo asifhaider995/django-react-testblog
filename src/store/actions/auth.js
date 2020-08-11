@@ -28,7 +28,7 @@ export const authFail = (error) => {
 export const logout = () => {
   localStorage.removeItem('token');
   localStorage.removeItem('expirationDate');
-  axios.post('https://djreact-testblog.herokuapp.com/rest-auth/logout/').catch(error => console.log(error))
+  axios.post('https://djreact-testblog.herokuapp.com/rest-auth/logout/').catch(error => console.error(error))
   return {
     type: actionTypes.AUTH_LOGOUT,
   }

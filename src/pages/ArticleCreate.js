@@ -14,7 +14,7 @@ import {
 import axios from 'axios';
 
 //   Host names
-//  'http://127.0.0.1'
+//  'http://127.0.0.1:8000'
 //  'https://djreact-testblog.herokuapp.com'
 
 
@@ -61,10 +61,8 @@ export default function ArticleCreate(props) {
   const [dataAvailable, setDataAvailable] = useState(false)
 
   var {ID} = useParams();
-  console.log(ID)
   useEffect((thisID=ID) => {
     let unmounted = false;
-    console.log("Create: "+props.token)
     if(props.requestType === 'put') {
       axios.defaults.headers = {
         "Content-Type": "application/json",
@@ -94,31 +92,43 @@ export default function ArticleCreate(props) {
     return () => { unmounted = true };
   },[ID, props])
 
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+        }
+      }
+    }
+    return cookieValue;
+  }
 
   const handleSubmit = (event, requestType, articleID) => {
-    console.log("Submitted")
     event.preventDefault();
-    console.log(title)
-    console.log(content)
+    const csrftoken = getCookie('csrftoken');
     switch (requestType) {
       case 'post':
-        console.log('POST')
-        console.log("Create: "+props.token)
         axios.defaults.headers = {
+          "X-CSRFToken": csrftoken,
           "Content-Type": "application/json",
           "Authorization": 'Token '+props.token
         }
         axios.post(`https://djreact-testblog.herokuapp.com/api/article/` , {
-          title: title,
-          content: content
+          "title": title,
+          "content": content
         }).then(response => {
           console.log(response.status);
           props.handleDiscard()
         }).catch(error => console.error(error))
         break;
       case 'put':
-        console.log('PUT')
         axios.defaults.headers = {
+          "X-CSRFToken": csrftoken,
           "Content-Type": "application/json",
           "Authorization": 'Token '+props.token,
         }
@@ -131,7 +141,8 @@ export default function ArticleCreate(props) {
         }).catch(error => console.error(error))
         break;
       default:
-        console.log('Default')
+        console.log('Default');
+        break;
 
 
     }
@@ -145,7 +156,7 @@ export default function ArticleCreate(props) {
       <Paper elevation={3} className={classes.paper}>
           { (isLoading) ? (
             <Loading />
-          ) : ( (dataAvailable) ? (
+          ) : ( dataAvailable ? (
             <Grid className={classes.grid}>
               <Typography variant='h3' style={{ textAlign: 'center'}}> { props.requestType ==='post' ? 'Create' : 'Update'} Article </Typography>
               <form onSubmit={(event,requestType, articleID) =>{ handleSubmit(event, props.requestType, ID) }}>
@@ -194,7 +205,7 @@ export default function ArticleCreate(props) {
               </Grid>
             </form>
           </Grid>
-          ) : ( <ServerError />) )
+        ) : ( <ServerError />))
           }
       </Paper>
     </Grid>
