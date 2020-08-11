@@ -13,7 +13,8 @@ const useStyles = makeStyles({
     paddingTop: '2rem',
     paddingBottom: '2rem',
     marginTop: '.5rem',
-    marginBottom: '.5rem'
+    marginBottom: '.5rem',
+    height: '50rem',
   },
   grid: {
     margin: '1em'
