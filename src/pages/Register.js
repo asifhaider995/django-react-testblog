@@ -37,10 +37,17 @@ const useStyles = makeStyles({
      marginTop: '.75rem',
      marginBottom: '.25rem'
    },
-    buttonGrid : {
-      marginTop: '1.5rem',
-      marginBottom: '2rem',
-    }
+   errorMessage: {
+     display: 'flex',
+     alignItems: 'center',
+     justifyContent: 'center',
+     width: '18rem',
+     height: '100%',
+   },
+   buttonGrid : {
+    marginTop: '1.5rem',
+    marginBottom: '2rem',
+   }
 
   });
 
@@ -53,13 +60,14 @@ function Register(props) {
 
   const classes = useStyles();
 
-  let errorMessage = null;
   if (props.error) {
+    const message = props.error.response.status === 400 ?
+    "Both Passwords need to match"
+    : props.error.message;
     errorMessage = (
-      <Typography> {props.error.message} </Typography>
+      <Typography style={{whiteSpace: 'pre-line'}} align='center' variant='subtitle2' color='error'> {message} </Typography>
     )
   }
-
   const handleChange = (event) => {
     event.preventDefault();
     switch (event.target.name) {
@@ -141,7 +149,9 @@ function Register(props) {
                         className={classes.textFieldItems}
                       />
                     </Grid>
-                    {errorMessage}
+                    <Grid className={classes.errorMessage}>
+                      {errorMessage}
+                    </Grid>
                     <Grid className={classes.buttonGrid}>
                       <Button type='submit' fullWidth variant='contained' color="primary"> Register </Button>
                     </Grid>
