@@ -60,6 +60,7 @@ function Register(props) {
 
   const classes = useStyles();
 
+  let errorMessage;
   if (props.error) {
     const message = props.error.response.status === 400 ?
     "Both Passwords need to match"
