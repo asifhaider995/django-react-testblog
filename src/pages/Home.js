@@ -12,9 +12,9 @@ const useStyles = makeStyles({
     alignItems: 'center',
     paddingTop: '2rem',
     paddingBottom: '2rem',
-    marginTop: '.5rem',
-    marginBottom: '.5rem',
-    height: '50rem',
+    marginTop: '1rem',
+    marginBottom: '1rem',
+    height: '100%',
   },
   grid: {
     margin: '1em'

@@ -28,7 +28,7 @@ def get_key():
 SECRET_KEY = get_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['djreact-testblog.herokuapp.com','127.0.0.1']
 
@@ -154,10 +154,10 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
 
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ]
 }
 # CSRF_COOKIE_NAME = "XSRF-TOKEN"

@@ -69,6 +69,7 @@ export default function ArticleCreate(props) {
         "Authorization": 'Token '+props.token
       }
       axios.get('https://djreact-testblog.herokuapp.com/api/article/'+thisID+'/')
+      // axios.get('http://127.0.0.1:8000/api/article/'+thisID+'/')
       .then( response => {
         if(!unmounted) {
           setTitle(response.data.title)
@@ -118,7 +119,8 @@ export default function ArticleCreate(props) {
           "Content-Type": "application/json",
           "Authorization": 'Token '+props.token
         }
-        axios.post(`https://djreact-testblog.herokuapp.com/api/article/` , {
+        // axios.post(`https://djreact-testblog.herokuapp.com/api/article/` , {
+        axios.post(`http://127.0.0.1:8000/api/article/` , {
           "title": title,
           "content": content
         }).then(response => {
@@ -132,12 +134,13 @@ export default function ArticleCreate(props) {
           "Content-Type": "application/json",
           "Authorization": 'Token '+props.token,
         }
-        axios.put(`https://djreact-testblog.herokuapp.com/api/article/`+(articleID)+`/` , {
+        axios.put(`https://djreact-testblog.herokuapp.com/api/article/${articleID}/` , {
+        // axios.put(`http://127.0.0.1:8000/api/article/${articleID}/` , {
           title: title,
           content: content
         }).then(response => {
           console.log(response.status)
-          window.location.href=('/'+articleID+'/')
+          window.location.href=(`/${articleID}/`)
         }).catch(error => console.error(error))
         break;
       default:
