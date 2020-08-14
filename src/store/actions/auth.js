@@ -29,7 +29,6 @@ export const logout = () => {
   localStorage.removeItem('token');
   localStorage.removeItem('expirationDate');
   axios.post('https://djreact-testblog.herokuapp.com/rest-auth/logout/')
-  // axios.post('http://127.0.0.1:8000/rest-auth/logout/')
   .catch(error => console.error(error))
   return {
     type: actionTypes.AUTH_LOGOUT,
@@ -68,8 +67,7 @@ export const authLogin = (username, password) => {
       "X-CSRFToken": csrftoken,
       "Content-Type": "application/json",
     }
-    // axios.post('https://djreact-testblog.herokuapp.com/rest-auth/login/',{
-    axios.post('http://127.0.0.1:8000/rest-auth/login/',{
+    axios.post('https://djreact-testblog.herokuapp.com/rest-auth/login/',{
       "username": username,
       "password": password
     }).then(response => {
@@ -89,8 +87,12 @@ export const authLogin = (username, password) => {
 export const authRegister = (username, email, password, password2) => {
   return dispatch => {
     dispatch(authStart());
+    const csrftoken = getCookie('csrftoken');
+    axios.defaults.headers = {
+      "X-CSRFToken": csrftoken,
+      "Content-Type": "application/json",
+    }
     axios.post('https://djreact-testblog.herokuapp.com/rest-auth/registration/',{
-    // axios.post('http://127.0.0.1:8000/rest-auth/registration/',{
       "username": username,
       "email": email,
       "password1": password,

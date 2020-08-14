@@ -53,7 +53,6 @@ function App(props) {
       "Authorization": 'Token '+props.token
     }
     axios.get("https://djreact-testblog.herokuapp.com/api/article/")
-    // axios.get("http://127.0.0.1:8000/api/article/")
     .then( response => {
       if(!unmounted) {
         setUsers(response.data)

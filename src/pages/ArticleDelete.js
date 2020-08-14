@@ -78,7 +78,6 @@ export default function ArticleDelete(props) {
       "Authorization": 'Token '+props.token
     }
     axios.get(`https://djreact-testblog.herokuapp.com/api/article/${thisID}/`)
-    // axios.get(`http://127.0.0.1:8000/api/article/${thisID}/`)
     .then( response => {
       if(!unmounted) {
         setTitle(response.data.title)
@@ -106,7 +105,6 @@ export default function ArticleDelete(props) {
       "Authorization": 'Token '+props.token
     }
     axios.delete(`https://djreact-testblog.herokuapp.com/api/article/${ID}/`)
-    // axios.delete(`http://127.0.0.1:8000/api/article/${ID}/`)
     .then(response => {
       console.log(response.status);
       props.handleRedirect()
