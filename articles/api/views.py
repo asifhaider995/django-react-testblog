@@ -1,8 +1,7 @@
-
-from articles.models import Article
-from .serializers import ArticleSerializer
+from django.contrib.auth.models import User
+from articles.models import Article, Users
+from .serializers import ArticleSerializer, UserSerializer, UsersSerializer
 from rest_framework import viewsets
-from rest_framework.authentication import TokenAuthentication, SessionAuthentication
 
 
 class ArticleViewSet(viewsets.ModelViewSet):
@@ -11,6 +10,14 @@ class ArticleViewSet(viewsets.ModelViewSet):
     """
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
+
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class UsersViewSet(viewsets.ModelViewSet):
+    queryset = Users.objects.all()
+    serializer_class = UsersSerializer
 # from rest_framework.generics import (
 #     ListAPIView,
 #     RetrieveAPIView,

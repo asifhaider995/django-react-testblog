@@ -18,7 +18,14 @@ export default function Loading(props) {
   const classes = useStyles();
 
   return (
-    <Grid>
+    <Grid
+      item
+      xs={12}
+      sm={12}
+      md={12}
+      lg={12}
+      xl={12}
+    >
       <Paper elevation={3} className={classes.rootPaper}>
           <Typography
             variant="h4"

@@ -23,10 +23,6 @@ const useStyles = makeStyles({
     alignItems: 'center',
     padding: '10px'
   },
-  cardRoot: {
-    maxWidth: '100%',
-    alignItems: 'center',
-  },
   media: {
     height: '80%',
   },
@@ -46,6 +42,11 @@ const useStyles = makeStyles({
 
 export default function Home(props) {
   const classes = useStyles();
+
+  const data = props.data
+  const dataAvailable = props.dataAvailable
+  const isLoading = props.isLoading
+
   function handleCardClick(id) {
     window.location.href='/'+id
   }
@@ -55,45 +56,13 @@ export default function Home(props) {
           <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.grid}>
             <Paper elevation={3} className={classes.paper}>
               {
-                (props.dataAvailable && !props.isLoading) ? (
-                  props.data.map((items) => {
-                    return (
-                      <Grid
-                        key={items.id}
-                        item
-                        xs={12}
-                        sm={12}
-                        md={12}
-                        lg={12}
-                        xl={12}
-                      >
-                        <ArticleList onClick={() => handleCardClick(items.id)} title={items.title} content={items.content} className={classes.cardRoot}/>
-                      </Grid>
-                    )
-                  })
-                ) : ( (!props.isLoading && !props.dataAvailable) ? (
-                  <Grid
-                    item
-                    xs={12}
-                    sm={12}
-                    md={12}
-                    lg={12}
-                    xl={12}
-                  >
+                isLoading ? (
+                  <Loading />
+                ) : (!dataAvailable) ? (
                     <ServerError />
-                  </Grid>
                 ) : (
-                  <Grid
-                    item
-                    xs={12}
-                    sm={12}
-                    md={12}
-                    lg={12}
-                    xl={12}
-                  >
-                    <Loading />
-                  </Grid>
-                ))
+                  <ArticleList handleClick={handleCardClick} data={data} />
+                )
               }
               </Paper>
             </Grid>

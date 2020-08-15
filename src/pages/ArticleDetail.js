@@ -85,7 +85,8 @@ export default function ArticleDetail(props) {
       "Content-Type": "application/json",
       "Authorization": 'Token '+props.token
     }
-    axios.get(`https://djreact-testblog.herokuapp.com/api/article/${thisID}/`)
+    axios.get(`http://127.0.0.1:8000/api/article/${thisID}/`)
+    // axios.get(`https://djreact-testblog.herokuapp.com/api/article/${thisID}/`)
     .then( response => {
       if(!unmounted) {
         setArticle(response.data)

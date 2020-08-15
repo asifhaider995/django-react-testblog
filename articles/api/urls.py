@@ -10,9 +10,11 @@ from django.urls import path
 #     path('<pk>/delete', ArticleDeleteView.as_view(), name='article-update')
 #
 # ]
-from articles.api.views import ArticleViewSet
+from articles.api.views import ArticleViewSet, UserViewSet, UsersViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register(r'article', ArticleViewSet, basename='article')
+router.register(r'user', UserViewSet, basename='user-relate')
+router.register(r'user-profile', UsersViewSet, basename='user-profile')
 urlpatterns = router.urls
