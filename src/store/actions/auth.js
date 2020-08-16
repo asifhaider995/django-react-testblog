@@ -45,13 +45,14 @@ function getCookie(name) {
 export const logout = () => {
   localStorage.removeItem('token');
   localStorage.removeItem('expirationDate');
+  localStorage.removeItem('username');
   // axios.post('https://djreact-testblog.herokuapp.com/rest-auth/logout/')
   const csrftoken = getCookie('csrftoken');
   axios.defaults.headers = {
     "X-CSRFToken": csrftoken,
     "Content-Type": "application/json",
   }
-  axios.post('http://127.0.0.1:8000/rest-auth/logout/')
+  axios.post('https://djreact-testblog.herokuapp.com/rest-auth/logout/')
   .catch(error => console.error(error))
   return {
     type: actionTypes.AUTH_LOGOUT,
@@ -74,8 +75,8 @@ export const authLogin = (username, password) => {
       "X-CSRFToken": csrftoken,
       "Content-Type": "application/json",
     }
-    // axios.post('https://djreact-testblog.herokuapp.com/rest-auth/login/',{
-    axios.post('http://127.0.0.1:8000/rest-auth/login/',{
+    // axios.post('http://127.0.0.1:8000/rest-auth/login/',{
+    axios.post('https://djreact-testblog.herokuapp.com/rest-auth/login/',{
       "username": username,
       "password": password
     }).then(response => {
@@ -83,6 +84,7 @@ export const authLogin = (username, password) => {
         const expireDate = new Date(new Date().getTime() + 3600 * 1000)
         localStorage.setItem('token', token);
         localStorage.setItem('expirationDate', expireDate);
+        localStorage.setItem('username', username);
         dispatch(authSuccess(token));
         dispatch(checkAuthTimeout(3600)); // One hour
     }).catch(error => {
@@ -100,8 +102,8 @@ export const authRegister = (username, email, password, password2) => {
       "X-CSRFToken": csrftoken,
       "Content-Type": "application/json",
     }
-    axios.post('http://127.0.0.1:8000/rest-auth/registration/',{
-    // axios.post('https://djreact-testblog.herokuapp.com/rest-auth/registration/',{
+    // axios.post('http://127.0.0.1:8000/rest-auth/registration/',{
+    axios.post('https://djreact-testblog.herokuapp.com/rest-auth/registration/',{
       "username": username,
       "email": email,
       "password1": password,
@@ -111,6 +113,7 @@ export const authRegister = (username, email, password, password2) => {
         const expirationDate = new Date(new Date().getTime() + 3600 * 1000)
         localStorage.setItem('token', token);
         localStorage.setItem('expirationDate', expirationDate);
+        localStorage.setItem('username', username);
         dispatch(authSuccess(token));
         dispatch(checkAuthTimeout(3600)); // One hour
     }).catch(error => {

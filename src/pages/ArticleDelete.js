@@ -77,8 +77,8 @@ export default function ArticleDelete(props) {
       "Content-Type": "application/json",
       "Authorization": 'Token '+props.token
     }
-    axios.get(`http://127.0.0.1:8000/api/article/${thisID}/`)
-    // axios.get(`https://djreact-testblog.herokuapp.com/api/article/${thisID}/`)
+    // axios.get(`http://127.0.0.1:8000/api/article/${thisID}/`)
+    axios.get(`https://djreact-testblog.herokuapp.com/api/article/${thisID}/`)
     .then( response => {
       if(!unmounted) {
         setTitle(response.data.title)
@@ -105,8 +105,8 @@ export default function ArticleDelete(props) {
       "Content-Type": "application/json",
       "Authorization": 'Token '+props.token
     }
-    axios.delete(`http://127.0.0.1:8000/api/article/${ID}/`)
-    // axios.delete(`https://djreact-testblog.herokuapp.com/api/article/${ID}/`)
+    // axios.delete(`http://127.0.0.1:8000/api/article/${ID}/`)
+    axios.delete(`https://djreact-testblog.herokuapp.com/api/article/${ID}/`)
     .then(response => {
       console.log(response.status);
       props.handleRedirect()
