@@ -63,7 +63,7 @@ function Register(props) {
   let errorMessage;
   if (props.error) {
     const message = props.error.response.status === 400 ?
-    "Both Passwords need to match"
+    "Both Passwords need to match \n Or, \n Password is too weak"
     : props.error.message;
     errorMessage = (
       <Typography style={{whiteSpace: 'pre-line'}} align='center' variant='subtitle2' color='error'> {message} </Typography>
